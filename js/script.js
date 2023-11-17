@@ -1,85 +1,69 @@
-import peliculas from './peliculas.js'
+//Corrección de DATA
 
-//Consolelog n1 Cuando lo imprimo en la consola me aparecen todos los objetos con las peliculas
-console.log(peliculas);
+import peliculas from "./peliculas.js"
 
-//Creada la constante generoContainer que engloba el dom genero-container
-const generoContainer= document.querySelectorAll(".genero-container");
+//poster_path
+//genre_ids
+//title
 
-//Consolelog n2 imprimo en la consola la constante generoContainer para ver que contiene
-console.log(generoContainer); // salen 3 elementos en la consola length:3
+const getfilterPelis = (idGenero, contenedorId ) => {
+const contenedor = document.getElementById(contenedorId)
+const peliculasGenero= peliculas.filter(pelicula => pelicula.genre_ids.includes(idGenero))
 
-//Creada la constante genero que engloba el dom genero
-const genero=document.querySelectorAll(".genero");
+for (const element of peliculasGenero){
+let templatePelis = `<div class= "pelicula">
+<img src= "https://image.tmdb.org/t/p/w500/${element.poster_path}" alt="${element.title}"/>
+<h3>${element.title}</h3>
+</div>`
 
-//Consolelog n3 imprimo en la consola la constante genero para ver que contiene
-console.log(genero) // salen 3 elementos en la consola length: 3
+// Hay que tener cuidado con el innerHtml porque hace un repintado y te cambia lo que hay en el html
+//importantisimo el += copia y suma todo lo que hay! Más igual está sumando a lo que hay cada vuelta
+//cuidado si pusiera innerText o textcontent te devolvería solo en texto sin devolverte la imagen
 
-//Creada la constante pelisDeAcción  vinculada con el dom a través de getElementById
-const pelisDeAcción= document.getElementById("genero-28");
+contenedor.innerHTML += templatePelis;
 
-//Consolelog n4
-console.log(pelisDeAcción)
+}
+}
 
-//Creada la constante pelisDeThriller  vinculada con el dom a través de getElementById
-const pelisDeThriller= document.getElementById("genero-53");
-
-//Consolelog n5
-console.log(pelisDeThriller )
-
-//Creada la constante pelisDeAventura vinculada con el dom a través de getElementById
-const pelisDeAventura= document.getElementById("genero-12");
-
-
-//Consolelog n6
-console.log(pelisDeAventura )
+getfilterPelis(28, "genero-28")
+getfilterPelis(28, "genero-12")
+getfilterPelis(28, "genero-53")
 
 
 
-  pelisDeAventura.innerHTML =
-  peliculas;
 
-  pelisDeThriller.innerHTML =
-  "Titulo: " + peliculas[0].title;
-  
- //Creo una variable filtrada con filter por todos los elementos del objeto por genero que incluya el genero 28
- // includes es un metodo de js para incluir un determinado elemento en principio debe de retornar tue o false
- let generoAventura= peliculas.filter(elemento => elemento.genre_ids.includes = 28);
+//otra forma de hacerlo seria
 
- 
- //Consolelog n Imprime todos los objetos uno a uno en la consola creando 20 objetos separados
-//for (let genre_ids in peliculas) {
- //console.log(genre_ids + ": " + peliculas[genre_ids]);
-//}
-  
- 
-//Consolelog n
- //console.log(peliculas.filter(element => element.genre_ids = 56));
-
-  
+// const divAccion = document.getElementById('genero-28');
+// const divThriller = document.getElementById('genero-53');
+// const divAventura = document.getElementById('genero-12');
 
 
+// peliculas.filter((element) => element.genre_ids.find((genre) => {
+//   let titulo = document.createElement('p');
+//   titulo.textContent = element.title;
 
- //ESTRUCTURA FOR IN //NO ME FUNCIONA
- 
-//for (peliculas.original_title in peliculas)
- //  pelisDeAcción.InnerHtml((`${original_title}: ${peliculas[original_title]}`));
-//}
- 
-// a parte de iterar tendría que saber como filtrarlo con filter();
- 
+//   let poster = document.createElement('img');
+//   poster.src = `https://image.tmdb.org/t/p/w200${element.poster_path}`;
+//   poster.alt = `Poster de la película ${element.title}`;
 
-  //let functionTitulos= function (i,peliculas){
- //   for(i=0,i<peliculas.length;i++){
- //     return peliculas[i].title
- //   }
- // }
- // console.log(functionTitulos());
+//   let extra = document.createElement('p');
+//   extra.innerHTML = `Estreno: ${element.release_date} <br /> Valoración: <strong>${element.vote_average}</strong>`;
+//   extra.classList.add('oculto');
+
+//   let divPeli = document.createElement('div');
+//   divPeli.appendChild(titulo);
+//   titulo.insertAdjacentElement('beforebegin', poster);
+//   titulo.insertAdjacentElement('afterend', extra);
+//   divPeli.classList.add('cartel');
 
 
-//pelisDeAcción.innerHTML=
-//"<img href=https://image.tmdb.org/t/p/w500/qA5kPYZA7FkVvqcEfJRoOy4kpHg.jpg height:500px width:500px>";
-
- 
-
+//   if (genre === 28) {
+//       divAccion.appendChild(divPeli);
+//   } else if (genre === 53) {
+//       divThriller.appendChild(divPeli);
+//   } else if (genre === 12) {
+//       divAventura.appendChild(divPeli);
+//   }
+// }))
 
